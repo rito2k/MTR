@@ -135,8 +135,8 @@ function retrieveLogs{
      if($cred -ne [System.Management.Automation.PSCredential]::Empty) {
           try{
                Write-Host "Collecting `'$Computer`' device logs..." -for Cyan
-               #$logFile = invoke-command {Powershell.exe -ExecutionPolicy Bypass -File C:\Rigel\x64\Scripts\Provisioning\ScriptLaunch.ps1 CollectSrsV2Logs.ps1; Get-ChildItem -Path C:\Rigel\*.zip | Sort-Object -Descending -Property LastWriteTime | Select-Object -First 1} -ComputerName $Computer -Credential $cred
-               $logFile = invoke-command {Get-ChildItem -Path C:\Rigel\*.zip | Sort-Object -Descending -Property LastWriteTime | Select-Object -First 1} -ComputerName $Computer -Credential $cred
+               $logFile = invoke-command {Powershell.exe -ExecutionPolicy Bypass -File C:\Rigel\x64\Scripts\Provisioning\ScriptLaunch.ps1 CollectSrsV2Logs.ps1; Get-ChildItem -Path C:\Rigel\*.zip | Sort-Object -Descending -Property LastWriteTime | Select-Object -First 1} -ComputerName $Computer -Credential $cred
+               #$logFile = invoke-command {Get-ChildItem -Path C:\Rigel\*.zip | Sort-Object -Descending -Property LastWriteTime | Select-Object -First 1} -ComputerName $Computer -Credential $cred
                if ($logFile){
                     $logFileName = $logFile.FullName
                     $localfile = $scriptPath+$logFile.Name
