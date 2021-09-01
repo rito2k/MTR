@@ -12,7 +12,7 @@ function Show-Menu{
 }
 function selectOpt1 {
      Clear-Host
-     Write-Host "Please select Option 1 first to set MTR device and credentials for remote connection." -ForegroundColor Magenta
+     Write-Host "Please select Option 1 first to target MTR device by providing credentials for remote connection." -ForegroundColor Magenta
 }
 function remote_logoff{
      param (
@@ -136,7 +136,9 @@ function retrieveLogs{
           try{
                Write-Host "Collecting `'$Computer`' device logs..." -for Cyan
                $logFile = invoke-command {Powershell.exe -ExecutionPolicy Bypass -File C:\Rigel\x64\Scripts\Provisioning\ScriptLaunch.ps1 CollectSrsV2Logs.ps1; Get-ChildItem -Path C:\Rigel\*.zip | Sort-Object -Descending -Property LastWriteTime | Select-Object -First 1} -ComputerName $Computer -Credential $cred
-               #$logFile = invoke-command {Get-ChildItem -Path C:\Rigel\*.zip | Sort-Object -Descending -Property LastWriteTime | Select-Object -First 1} -ComputerName $Computer -Credential $cred
+               <# Debugging
+               $logFile = invoke-command {Get-ChildItem -Path C:\Rigel\*.zip | Sort-Object -Descending -Property LastWriteTime | Select-Object -First 1} -ComputerName $Computer -Credential $cred
+               #>
                if ($logFile){
                     $logFileName = $logFile.FullName
                     $localfile = $scriptPath+$logFile.Name
@@ -358,8 +360,8 @@ $menuOptions = @(
 "7: Restart MTR."
 "Q: Press 'Q' to quit."
 )
-# 8: Run Agent Test Tool? Guess not
-# 9: Set MTR ressource account credentials
+# 8: Set MTR ressource account credentials
+# 9: Run Agent Test Tool? Guess not in scope
 
 #
 # MAIN
@@ -375,7 +377,7 @@ do{
                     $MTR_hostName = Read-Host -Prompt "Please insert MTR resolvable HOSTNAME"
                }
                else{
-                    $prompt = Read-Host -Prompt "Please insert MTR resolvable HOSTNAME. Press Enter to keep default value [$MTR_hostName]"
+                    $prompt = Read-Host -Prompt "Please insert MTR resolvable HOSTNAME. Press Enter to keep default value if present [$MTR_hostName]"
                     if ($prompt -ne '') {
                          $MTR_hostName = $prompt
                     }
@@ -404,9 +406,7 @@ do{
                          '7'{rebootMTR $MTR_hostName $creds;$MTR_ready = $false;break}
                     }                    
                }
-               else {                    
-                    selectOpt1
-               }
+               else {selectOpt1}
                break
           }
           'Q' {
@@ -414,4 +414,4 @@ do{
           }           
      }
 }
-until ($input -eq 'q')
+until ($input -eq 'Q')
