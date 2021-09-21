@@ -46,8 +46,7 @@ Meet the basic prerequisites and you should be ready to go!
 - Open an admin elevated Powershell session, run Enable-PSRemoting
 
 Use the _-SkipNetworkProfileCheck_ parameter if network is not trusted (public) and still want to force PsRemoting, or directly define your network as private by executing:
-
-    Set-NetConnectionProfile -Name "<Network_Name>" -NetworkCategory Private
+    `Set-NetConnectionProfile -Name "<Network_Name>" -NetworkCategory Private`
 
 Maybe you also want or need to override the Local Security Policy to allow to connect to the MTR remotely from the network:
 
@@ -69,7 +68,7 @@ From here on, you can enter a Powershell session on the remote device (1), or di
 Invoke the script, select an option and follow the instructions:
 
 **EXAMPLE:**
-_.\MTR_REMOTE_MGMT.ps1_
+  `_.\MTR_REMOTE_MGMT.ps1_`
 
 **MAIN MENU:**
 
