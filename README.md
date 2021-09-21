@@ -2,7 +2,7 @@
 This script is intended to serve as a backup management tool to address basic and initial tasks on a Microsoft Teams Room system based on Windows (MTRoW).
 
 Please follow the recommended best practices by Microsoft to setup, manage and maintain this kind of devices:
-https://docs.microsoft.com/en-us/microsoftteams/rooms/rooms-manage
+https://docs.microsoft.com/en-us/microsoftteams/rooms/
 
 This script can be helpful in the following scenarios:
 - Initial setup and configuration tasks
@@ -11,7 +11,7 @@ This script can be helpful in the following scenarios:
 
 ## Table of Contents
 
-- [MTR_REMOTE_MGMT](#MTR_REMOTE_MGMT)
+- [MTR_REMOTE_MGMT](#MTR_REMOTE_MGMT.ps1)
   - [Table of Contents](#table-of-contents)
   - [DISCLAIMER](#DISCLAIMER)
   - [Getting Started](#getting-started)
@@ -38,7 +38,7 @@ Meet the basic prerequisites and you should be ready to go!
 
 **On local management machine:**
 - Run $PSVersionTable and check if PSVersion >= 5.1
-Define the trusted remote endpoint(s) where you will connect to:
+- Define the trusted remote endpoint(s) where you will connect to:
 
     Set-Item WSMan:\localhost\Client\TrustedHosts -Value "<MTR_IP>|<MTR_Name>" [-Force]
 
