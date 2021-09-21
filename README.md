@@ -53,13 +53,14 @@ Maybe you also want or need to override the Local Security Policy to allow to co
 
   Open the Local Security Policy by running _Secpol.msc_ and add the Administrators security group to Security Settings -> Local Policies -> User Rights Assignment -> Access this computer from the network.
 
-From here on, you can directly enter a Powershell session on the remote device (1), or run PS commands (2) from your admin server/workstation with the appropriate credentials:
+From here on, you can enter a Powershell session on the remote device (1), or directly run PS commands (2) from your management server/workstation with the appropriate credentials:
 
     $cred = Get-Credential
     $MTR_device = "<MTR_FQDN_or_IP_Address>"
 
 (1): 
     `Enter-PSSession -ComputerName $MTR_device -Credential $cred`
+
 (2):
     `Invoke-command { <PS_scriptblock> } -ComputerName $MTR_device -Credential $cred`
 
