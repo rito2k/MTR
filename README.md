@@ -1,5 +1,5 @@
 # MTR_REMOTE_MGMT
-This script loops through all valid RDP Files in a provided folder path, extracts machine and logon name for each of them and generates a Remote Desktop Connection Manager group (RDG) file for your convenience.
+This script is intended to serve as a backup management tool to address basic and initial tasks on a Microsoft Teams Room system based on Windows (MTRoW).
 
 ## Table of Contents
 
