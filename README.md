@@ -74,7 +74,7 @@ Invoke the script, select an option and follow the instructions:
 **EXAMPLE:**
   `_.\MTR_REMOTE_MGMT.ps1_`
 
-**MAIN MENU:**
+**MAIN MENU:** (may differ from current release)
 
 
     (No target MTR!)
