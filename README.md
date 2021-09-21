@@ -44,7 +44,7 @@ On local management machine:
 - Run $PSVersionTable and check if PSVersion >= 5.1
 - Define the trusted remote endpoint(s) where you will connect to:
 
-    Set-Item WSMan:\localhost\Client\TrustedHosts -Value "<MTR_IP|<MTR_Name>" [-Force]
+    Set-Item WSMan:\localhost\Client\TrustedHosts -Value "<MTR_IP|<MTR_Name>" -Force
 
 Locally, on remote MTR device:
 - Open an admin elevated Powershell session, run Enable-PSRemoting
@@ -61,7 +61,9 @@ From here on, you can directly enter a Powershell session on the remote device (
 
     $cred = Get-Credential <MTR_Admin_AccountName>
     $MTR_device = "<MTR_FQDN_or_IP_Address>"
+
 (1): 
+
     Enter-PSSession -ComputerName $MTR_device -Credential $cred
 
 or (2):
