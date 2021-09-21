@@ -38,21 +38,21 @@ Meet the basic prerequisites and you should be ready to go!
 * MTR device resolvable and accesible over the network
 
 **On local management machine:**
-* Run `$PSVersionTable` and check if PSVersion >= 5.1
+* Run `$PSVersionTable` and check if PSVersion matches required version
 * Define the trusted remote endpoint(s) where you will connect to:
 
     `Set-Item WSMan:\localhost\Client\TrustedHosts -Value "<MTR_IP>|<MTR_Name>" [-Force]`
 
 **Locally, on remote MTR device:**
-* Open an admin elevated Powershell session, run:
+* Open an admin elevated Powershell session and run:
 
     `Enable-PSRemoting`
 
-  Optional: Use the _-SkipNetworkProfileCheck_ parameter if network is not trusted (public) and still want to force PsRemoting, or directly define your network as private by executing:
+  **Optional:** Use the _-SkipNetworkProfileCheck_ parameter if network is not trusted (public) and still want to force PsRemoting, or directly define your network as private by executing:
 
     `Set-NetConnectionProfile -Name "<Network_Name>" -NetworkCategory Private`
 
-Maybe you also want or need to override the Local Security Policy to allow to connect to the MTR remotely from the network:
+* Maybe you also want or need to override the Local Security Policy to allow to connect to the MTR remotely from the network:
 
   Open the Local Security Policy by running _Secpol.msc_ and add the Administrators security group to Security Settings -> Local Policies -> User Rights Assignment -> Access this computer from the network.
 
