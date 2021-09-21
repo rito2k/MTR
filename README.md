@@ -17,6 +17,7 @@ This script can be helpful in the following scenarios:
   - [Getting Started](#getting-started)
     - [Prerequisites](#prerequisites)    
   - [Usage](#usage)
+  - [FAQ](#FAQ)
   - [License](#license)
 
 ## DISCLAIMER
@@ -37,7 +38,7 @@ Meet the basic prerequisites and you should be ready to go!
 * MTR device resolvable and accesible over the network
 
 **On local management machine:**
-* Run $PSVersionTable and check if PSVersion >= 5.1
+* Run `$PSVersionTable` and check if PSVersion >= 5.1
 * Define the trusted remote endpoint(s) where you will connect to:
 
     `Set-Item WSMan:\localhost\Client\TrustedHosts -Value "<MTR_IP>|<MTR_Name>" [-Force]`
@@ -47,7 +48,7 @@ Meet the basic prerequisites and you should be ready to go!
 
     `Enable-PSRemoting`
 
-  Use the _-SkipNetworkProfileCheck_ parameter if network is not trusted (public) and still want to force PsRemoting, or directly define your network as private by executing:
+  Optional: Use the _-SkipNetworkProfileCheck_ parameter if network is not trusted (public) and still want to force PsRemoting, or directly define your network as private by executing:
 
     `Set-NetConnectionProfile -Name "<Network_Name>" -NetworkCategory Private`
 
@@ -89,6 +90,11 @@ Invoke the script, select an option and follow the instructions:
     Q: Press 'Q' to quit.
     Please make a selection:
 
+
+## FAQ
+
+* Question: Can I use this tool to operate in batches on multiple MTR devices at the same time?
+  Answer: No, this script is intended as a backup tool to operate on single MTR devices as of now.
 
 ## License
 
