@@ -71,7 +71,19 @@ Invoke the script, select an option and follow the instructions:
 **EXAMPLE:**
 _.\MTR_REMOTE_MGMT.ps1_
 
+**MAIN MENU:**
+    (No target MTR!)
 
+    ================ MTR REMOTE MANAGEMENT ================
+    1: Target MTR device.
+    2: Change MTR 'Admin' local user password.
+    3: Check MTR status.
+    4: Get MTR device logs.
+    5: Set MTR theme image.
+    6: Logoff MTR 'Skype' user.
+    7: Restart MTR.
+    Q: Press 'Q' to quit.
+    Please make a selection:
 
 
 ## License
