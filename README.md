@@ -5,9 +5,9 @@ Please follow the recommended best practices by Microsoft to setup, manage and m
 https://docs.microsoft.com/en-us/microsoftteams/rooms/
 
 This script can be helpful in the following scenarios:
-- Initial setup and configuration tasks
-- Unable to access or manage the device via Microsoft Teams Admin Center (TAC) or Microsoft Endpoint Manager Admin Center / Intune.
-- Manage standalone devices
+* Initial setup and configuration tasks
+* Unable to access or manage the device via Microsoft Teams Admin Center (TAC) or Microsoft Endpoint Manager Admin Center / Intune.
+* Manage standalone devices
 
 ## Table of Contents
 
@@ -32,23 +32,23 @@ Meet the basic prerequisites and you should be ready to go!
 
 ### Prerequisites
 
-- PowerShell (PS) Version 5.1+
-- Remote Powershell enabled on remote MTR
-- MTR device resolvable and accesible over the network
+* PowerShell (PS) Version 5.1+
+* Remote Powershell enabled on remote MTR
+* MTR device resolvable and accesible over the network
 
 **On local management machine:**
-- Run $PSVersionTable and check if PSVersion >= 5.1
-- Define the trusted remote endpoint(s) where you will connect to:
+* Run $PSVersionTable and check if PSVersion >= 5.1
+* Define the trusted remote endpoint(s) where you will connect to:
 
     `Set-Item WSMan:\localhost\Client\TrustedHosts -Value "<MTR_IP>|<MTR_Name>" [-Force]`
 
 **Locally, on remote MTR device:**
-- Open an admin elevated Powershell session, run Enable-PSRemoting
+* Open an admin elevated Powershell session, run Enable-PSRemoting
 
 Use the _-SkipNetworkProfileCheck_ parameter if network is not trusted (public) and still want to force PsRemoting, or directly define your network as private by executing:
 
-    `Set-NetConnectionProfile -Name "<Network_Name>" -NetworkCategory Private`
-    
+    Set-NetConnectionProfile -Name "<Network_Name>" -NetworkCategory Private
+
 Maybe you also want or need to override the Local Security Policy to allow to connect to the MTR remotely from the network:
 
   Open the Local Security Policy by running _Secpol.msc_ and add the Administrators security group to Security Settings -> Local Policies -> User Rights Assignment -> Access this computer from the network.
