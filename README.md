@@ -93,8 +93,9 @@ Invoke the script, select an option and follow the instructions:
 
 ## FAQ
 
-* Question: Can I use this tool to operate in batches on multiple MTR devices at the same time?
-  Answer: No, this script is intended as a backup tool to operate on single MTR devices as of now.
+* **Question**: Can I use this tool to operate in batches on multiple MTR devices at the same time?
+
+  **Answer**: No, this script is intended as a backup tool to operate on single MTR devices as of now.
 
 ## License
 
