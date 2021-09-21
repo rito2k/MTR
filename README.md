@@ -1,27 +1,22 @@
-# MTR_REMOTE_MGMT
-This script is intended to serve as a backup management tool to address basic and initial tasks on a Microsoft Teams Room system based on Windows (MTRoW).
-
-## Table of Contents
-
-- [MTR_REMOTE_MGMT](#MTR_REMOTE_MGMT)
-  - [Table of Contents](#table-of-contents)
-  - [About this Script](#about-this-script)
-  - [DISCLAIMER](#DISCLAIMER)
-  - [Getting Started](#getting-started)
-    - [Prerequisites](#prerequisites)    
-  - [Usage](#usage)
-  - [License](#license)
-
-## About this Script
-
+# MTR_REMOTE_MGMT.ps1
 This script is intended to serve as a backup management tool to address basic and initial tasks on a Microsoft Teams Room system based on Windows (MTRoW).
 
 Please follow the recommended best practices by Microsoft to setup, manage and maintain this kind of devices. Not doing so can result in undesired bahavior, or even leaving the device inaccessible and/or blocked.
 
 This script can be helpful in the following scenarios:
-- Initial setup and configuration
+- Initial setup and configuration tasks
 - Unable to access or manage the device via Microsoft Teams Admin Center (TAC) or Microsoft Endpoint Manager Admin Center / Intune.
 - Manage standalone devices
+
+## Table of Contents
+
+- [MTR_REMOTE_MGMT](#MTR_REMOTE_MGMT)
+  - [Table of Contents](#table-of-contents)
+  - [DISCLAIMER](#DISCLAIMER)
+  - [Getting Started](#getting-started)
+    - [Prerequisites](#prerequisites)    
+  - [Usage](#usage)
+  - [License](#license)
 
 ## DISCLAIMER
 This script requires to enable and allow remote access to the device, which may violate the security guidelines for devices in your environment. Only proceed if you know what you are doing, and feel comfortable to do so.
@@ -44,11 +39,7 @@ Meet the basic prerequisites and you should be ready to go!
 - Run $PSVersionTable and check if PSVersion >= 5.1
 - Define the trusted remote endpoint(s) where you will connect to:
 
-<<<<<<< HEAD
     Set-Item WSMan:\localhost\Client\TrustedHosts -Value "<MTR_IP>|<MTR_Name>" [-Force]
-=======
-    Set-Item WSMan:\localhost\Client\TrustedHosts -Value "<MTR_IP|<MTR_Name>" [-Force]
->>>>>>> 184ef25cdc18c7643cc3132a43239df6d42c81fb
 
 **Locally, on remote MTR device:**
 - Open an admin elevated Powershell session, run Enable-PSRemoting
