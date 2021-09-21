@@ -63,6 +63,7 @@ From here on, you can directly enter a Powershell session on the remote device (
     $MTR_device = "<MTR_FQDN_or_IP_Address>"
 (1): 
     Enter-PSSession -ComputerName $MTR_device -Credential $cred
+
 or (2):
     Invoke-command { <PS_scriptblock> } -ComputerName $MTR_device -Credential $cred
 
