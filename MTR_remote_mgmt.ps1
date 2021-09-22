@@ -1,4 +1,20 @@
-﻿#
+﻿<#
+ .SYNOPSIS  
+     Remote management of Microsoft Teams Rooms systems based on Windows.
+ .DESCRIPTION  
+     Change MTR 'Admin' local user password.
+     Check MTR status.
+     Get MTR device logs.
+     Set MTR theme image.
+     Logoff MTR 'Skype' user.
+     Restart MTR.
+ .NOTES
+     File Name  : MTR_remote_mgmt.ps1
+     Author     : https://github.com/rito2k
+     Version    : 2.0     
+#>
+
+#
 # FUNCTIONS
 #
 function Show-Menu{     
