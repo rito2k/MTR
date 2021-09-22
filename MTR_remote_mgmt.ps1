@@ -1,4 +1,12 @@
-﻿#
+﻿<#
+ .SYNOPSIS  
+     This script is intended to serve as a backup management tool to address basic and initial tasks on a Microsoft Teams Room system based on Windows (MTRoW)
+  .NOTES
+     File Name  : MTR_remote_mgmt.ps1
+     Author     : https://github.com/rito2k
+#>
+
+#
 # FUNCTIONS
 #
 function Show-Menu{     
