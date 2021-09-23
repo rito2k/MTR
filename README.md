@@ -72,7 +72,6 @@ From here on, you can enter a Powershell session on the remote device (1), or di
 
 Invoke the script, select an option and follow the instructions:
 
-**EXAMPLE:**
   `.\MTR_REMOTE_MGMT.ps1`
 
 **MAIN MENU:** _(may differ from current release)_
