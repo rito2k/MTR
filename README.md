@@ -17,6 +17,7 @@ This script can be helpful in the following scenarios:
   - [Getting Started](#getting-started)
     - [Prerequisites](#prerequisites)    
   - [Usage](#usage)
+  - [Backlog](#Backlog)
   - [FAQ](#FAQ)
   - [License](#license)
 
@@ -90,6 +91,11 @@ Invoke the script, select an option and follow the instructions:
     Q: Press 'Q' to quit.
     Please make a selection:
 
+## Backlog
+* Option to trigger daily maintenance scheduled task
+* Option to set MTR ressource account credentials
+* Option to set MTR proxy settings
+* Option to install the agent installer for MTR Premium portal management
 
 ## FAQ
 
