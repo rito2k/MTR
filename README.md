@@ -5,7 +5,7 @@ Please follow the recommended best practices by Microsoft to setup, manage and m
 https://docs.microsoft.com/en-us/microsoftteams/rooms/
 
 This script can be helpful in the following scenarios:
-* Initial setup and configuration tasks
+* Post OOBE setup basic configuration and maintenance tasks
 * Unable to access or manage the device via Microsoft Teams Admin Center (TAC) or Microsoft Endpoint Manager Admin Center / Intune.
 * Manage standalone devices
 
@@ -73,7 +73,7 @@ From here on, you can enter a Powershell session on the remote device (1), or di
 Invoke the script, select an option and follow the instructions:
 
 **EXAMPLE:**
-  `_.\MTR_REMOTE_MGMT.ps1_`
+  `.\MTR_REMOTE_MGMT.ps1`
 
 **MAIN MENU:** _(may differ from current release)_
 
