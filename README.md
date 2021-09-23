@@ -5,7 +5,7 @@ Please follow the recommended best practices by Microsoft to setup, manage and m
 https://docs.microsoft.com/en-us/microsoftteams/rooms/
 
 This script can be helpful in the following scenarios:
-* Initial setup and configuration tasks
+* Post OOBE setup basic configuration and maintenance tasks
 * Unable to access or manage the device via Microsoft Teams Admin Center (TAC) or Microsoft Endpoint Manager Admin Center / Intune.
 * Manage standalone devices
 
