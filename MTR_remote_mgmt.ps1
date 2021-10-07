@@ -114,6 +114,24 @@ function checkMTRStatus{
           }          
      }
 }
+function RunDailyMaintenanceTask{
+     param (
+          [Parameter()]
+          [string]$Computer,
+          [ValidateNotNull()]
+          [System.Management.Automation.Credential()]
+          [System.Management.Automation.PSCredential]$cred
+     )
+     if($cred -ne [System.Management.Automation.PSCredential]::Empty) {
+          try{
+               #Run nightly maintenance scheduled task
+               invoke-command {Start-ScheduledTask -TaskName "NightlyReboot" -TaskPath "\Microsoft\Skype\";Get-ScheduledTask -TaskName "NightlyReboot" | Select-Object TaskName,State} -ComputerName $Computer -Credential $cred
+          }
+          catch{
+               Write-Warning $_.Exception.Message
+          }          
+     }
+}
 function rebootMTR{
      param (
           [Parameter()]
@@ -366,6 +384,7 @@ $menuOptions = @(
 "5: Set MTR theme image."
 "6: Logoff MTR 'Skype' user."
 "7: Restart MTR."
+"8: Run nightly maintenance scheduled task."
 "Q: Press 'Q' to quit."
 )
 
@@ -394,7 +413,7 @@ do{
                }
                break
           }
-          {'2','3','4','5','6','7' -contains $_} {
+          {'2','3','4','5','6','7','8' -contains $_} {
                Write-Host 'Option #' $menuOptions[$selection] -ForegroundColor Cyan
                if ($MTR_ready){
                     switch ($selection){
@@ -410,6 +429,7 @@ do{
                          '5'{setTheme $MTR_hostName $creds;break}
                          '6'{remote_logoff $MTR_hostName $creds;break}
                          '7'{rebootMTR $MTR_hostName $creds;$MTR_ready = $false;break}
+                         '8'{RunDailyMaintenanceTask $MTR_hostName $creds;$MTR_ready = $false;break}
                     }                    
                }
                else {selectOpt1}
