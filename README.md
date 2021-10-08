@@ -92,10 +92,9 @@ Invoke the script, select an option and follow the instructions:
     Please make a selection:
 
 ## Backlog
-* Option to trigger daily maintenance scheduled task
 * Option to set MTR ressource account credentials
 * Option to set MTR proxy settings
-* Option to install the agent installer for MTR Premium portal management
+* Option to install the agent installer for MTR-Premium portal management
 
 ## FAQ
 
