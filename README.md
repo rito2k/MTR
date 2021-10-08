@@ -15,7 +15,8 @@ This script can be helpful in the following scenarios:
   - [Table of Contents](#table-of-contents)
   - [DISCLAIMER](#DISCLAIMER)
   - [Getting Started](#getting-started)
-    - [Prerequisites](#prerequisites)    
+    - [Prerequisites](#prerequisites)
+    - [Compatibility](#compatibility)
   - [Usage](#usage)
   - [Backlog](#Backlog)
   - [FAQ](#FAQ)
@@ -67,6 +68,11 @@ From here on, you can enter a Powershell session on the remote device (1), or di
 
 (2):
     `Invoke-command { <PS_scriptblock> } -ComputerName $MTR_device -Credential $cred`
+
+### Compatibility
+
+* Teams App Version 4.9.12.0
+* Teams App Version 4.10.10.0
 
 ## Usage
 
