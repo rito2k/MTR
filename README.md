@@ -76,7 +76,6 @@ Invoke the script, select an option and follow the instructions:
 
 **MAIN MENU:** _(may differ from current release)_
 
-
     (No target MTR!)
 
     ================ MTR REMOTE MANAGEMENT ================
@@ -86,15 +85,16 @@ Invoke the script, select an option and follow the instructions:
     4: Get MTR device logs.
     5: Set MTR theme image.
     6: Logoff MTR 'Skype' user.
-    7: Restart MTR.
+    6: Run nightly maintenance scheduled task.
+    7: Logoff MTR 'Skype' user.
+    8: Restart MTR.
     Q: Press 'Q' to quit.
     Please make a selection:
 
 ## Backlog
-* Option to trigger daily maintenance scheduled task
 * Option to set MTR ressource account credentials
 * Option to set MTR proxy settings
-* Option to install the agent installer for MTR Premium portal management
+* Option to install the agent installer for MTR-Premium portal management
 
 ## FAQ
 
