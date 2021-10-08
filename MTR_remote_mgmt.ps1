@@ -410,7 +410,6 @@ do{
           if ($MTR_hostName -ne ""){
                $MTR_ready = connect2MTR $MTR_hostName ([REF]$global:creds)
           }
-          break
      }
      else{
           if ($selection  -eq 'Q'){
