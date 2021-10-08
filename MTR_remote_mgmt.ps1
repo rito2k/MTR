@@ -382,9 +382,9 @@ $menuOptions = @(
 "3: Check MTR status."
 "4: Get MTR device logs."
 "5: Set MTR theme image."
-"6: Logoff MTR 'Skype' user."
-"7: Restart MTR."
-"8: Run nightly maintenance scheduled task."
+"6: Run nightly maintenance scheduled task."
+"7: Logoff MTR 'Skype' user."
+"8: Restart MTR."
 "Q: Press 'Q' to quit."
 )
 
@@ -395,25 +395,28 @@ Clear-Host
 do{
      Show-Menu
      $selection = (Read-Host "Please make a selection").ToUpper()
-     switch ($selection){
-          '1' {
-               Write-Host 'Option #' $menuOptions[$selection] -ForegroundColor Cyan
-               if ($MTR_hostName -eq ""){
-                    $MTR_hostName = Read-Host -Prompt "Please insert MTR resolvable HOSTNAME"
-               }
-               else{
-                    $prompt = Read-Host -Prompt "Please insert MTR resolvable HOSTNAME. Press Enter to keep default value if present [$MTR_hostName]"
-                    if ($prompt -ne '') {
-                         $MTR_hostName = $prompt
-                    }
-               }
-               $MTR_hostName = $MTR_hostName.ToUpper()
-               if ($MTR_hostName -ne ""){
-                    $MTR_ready = connect2MTR $MTR_hostName ([REF]$global:creds)
-               }
-               break
+     if ('1' -eq $selection){          
+          Write-Host 'Option #' $menuOptions[$selection] -ForegroundColor Cyan
+          if ($MTR_hostName -eq ""){
+               $MTR_hostName = Read-Host -Prompt "Please insert MTR resolvable HOSTNAME"
           }
-          {'2','3','4','5','6','7','8' -contains $_} {
+          else{
+               $prompt = Read-Host -Prompt "Please insert MTR resolvable HOSTNAME. Press Enter to keep default value if present [$MTR_hostName]"
+               if ($prompt -ne '') {
+                    $MTR_hostName = $prompt
+               }
+          }
+          $MTR_hostName = $MTR_hostName.ToUpper()
+          if ($MTR_hostName -ne ""){
+               $MTR_ready = connect2MTR $MTR_hostName ([REF]$global:creds)
+          }
+          break
+     }
+     else{
+          if ($selection  -eq 'Q'){
+                    exit
+          }
+          else{
                Write-Host 'Option #' $menuOptions[$selection] -ForegroundColor Cyan
                if ($MTR_ready){
                     switch ($selection){
@@ -427,17 +430,13 @@ do{
                          '3'{checkMTRStatus $MTR_hostName $creds;break}
                          '4'{retrieveLogs $MTR_hostName $creds;break}
                          '5'{setTheme $MTR_hostName $creds;break}
-                         '6'{remote_logoff $MTR_hostName $creds;break}
-                         '7'{rebootMTR $MTR_hostName $creds;$MTR_ready = $false;break}
-                         '8'{RunDailyMaintenanceTask $MTR_hostName $creds;$MTR_ready = $false;break}
+                         '6'{RunDailyMaintenanceTask $MTR_hostName $creds;$MTR_ready = $false;break}
+                         '7'{remote_logoff $MTR_hostName $creds;break}
+                         '8'{rebootMTR $MTR_hostName $creds;$MTR_ready = $false;break}
                     }                    
                }
                else {selectOpt1}
-               break
           }
-          'Q' {
-               exit
-          }           
      }
 }
-until ($input -eq 'Q')
+until ($selection -eq 'Q')
