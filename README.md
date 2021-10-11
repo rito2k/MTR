@@ -90,7 +90,6 @@ Invoke the script, select an option and follow the instructions:
     3: Check MTR status.
     4: Get MTR device logs.
     5: Set MTR theme image.
-    6: Logoff MTR 'Skype' user.
     6: Run nightly maintenance scheduled task.
     7: Logoff MTR 'Skype' user.
     8: Restart MTR.
