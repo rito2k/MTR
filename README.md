@@ -15,7 +15,8 @@ This script can be helpful in the following scenarios:
   - [Table of Contents](#table-of-contents)
   - [DISCLAIMER](#DISCLAIMER)
   - [Getting Started](#getting-started)
-    - [Prerequisites](#prerequisites)    
+    - [Prerequisites](#prerequisites)
+    - [Compatibility](#compatibility)
   - [Usage](#usage)
   - [Backlog](#Backlog)
   - [FAQ](#FAQ)
@@ -68,6 +69,11 @@ From here on, you can enter a Powershell session on the remote device (1), or di
 (2):
     `Invoke-command { <PS_scriptblock> } -ComputerName $MTR_device -Credential $cred`
 
+### Compatibility
+
+* Teams App Version 4.9.12.0
+* Teams App Version 4.10.10.0
+
 ## Usage
 
 Invoke the script, select an option and follow the instructions:
@@ -84,7 +90,6 @@ Invoke the script, select an option and follow the instructions:
     3: Check MTR status.
     4: Get MTR device logs.
     5: Set MTR theme image.
-    6: Logoff MTR 'Skype' user.
     6: Run nightly maintenance scheduled task.
     7: Logoff MTR 'Skype' user.
     8: Restart MTR.

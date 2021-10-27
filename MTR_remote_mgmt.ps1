@@ -372,7 +372,7 @@ function connect2MTR{
 [string]$MTR_hostName = $null
 [string]$MTR_AdminUser = "Admin"
 [bool]$MTR_ready = $false
-$ProgressPreference = 'SilentlyContinue'
+#$ProgressPreference = 'SilentlyContinue'
 [string]$scriptPath = "$PSScriptRoot\"
 [System.Management.Automation.PSCredential] $global:creds = $null
 $menuOptions = @(
