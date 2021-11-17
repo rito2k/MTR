@@ -101,13 +101,16 @@ function checkMTRStatus{
      if($cred -ne [System.Management.Automation.PSCredential]::Empty) {
           try{
                #Get System Info
-               invoke-command {Write-Host "SYSTEM INFO:";Get-WmiObject -Class Win32_ComputerSystem | Format-List PartOfDomain,Domain,Workgroup,Manufacturer,Model; Get-WmiObject -Class Win32_Bios | Format-List SerialNumber,SMBIOSBIOSVersion} -ComputerName $Computer -Credential $cred
+               invoke-command {Write-Host "===== SYSTEM INFO =====" -ForegroundColor Blue;Get-WmiObject -Class Win32_ComputerSystem | Format-List PartOfDomain,Domain,Workgroup,Manufacturer,Model; Get-WmiObject -Class Win32_Bios | Format-List SerialNumber,SMBIOSBIOSVersion} -ComputerName $Computer -Credential $cred
 
                #Get Attached Devices
-               invoke-command {Write-Host "VIDEO DEVICES:";Get-WmiObject -Class Win32_PnPEntity | Where-Object {$_.PNPClass -eq "Image"} | Format-Table Name,Status,Present; Write-Host "AUDIO DEVICES:"; Get-WmiObject -Class Win32_PnPEntity | Where-Object {$_.PNPClass -eq "Media"} | Format-Table Name,Status,Present; Write-Host "DISPLAY DEVICES:";Get-WmiObject -Class Win32_PnPEntity | Where-Object {$_.PNPClass -eq "Monitor"} | Format-Table Name,Status,Present} -ComputerName $Computer -credential $cred
+               invoke-command {Write-Host "===== VIDEO DEVICES =====" -ForegroundColor Blue;Get-WmiObject -Class Win32_PnPEntity | Where-Object {$_.PNPClass -eq "Image"} | Format-Table Name,Status,Present; Write-Host "===== AUDIO DEVICES =====" -ForegroundColor Blue; Get-WmiObject -Class Win32_PnPEntity | Where-Object {$_.PNPClass -eq "Media"} | Format-Table Name,Status,Present; Write-Host "===== DISPLAY DEVICES =====" -ForegroundColor Blue;Get-WmiObject -Class Win32_PnPEntity | Where-Object {$_.PNPClass -eq "Monitor"} | Format-Table Name,Status,Present} -ComputerName $Computer -credential $cred
 
                #Get App Status
-               invoke-command { $package = get-appxpackage -User Skype -Name Microsoft.SkypeRoomSystem; if ($null -eq $package) {Write-host "SkypeRoomSystems not installed."} else {write-host "SkypeRoomSystem Version : " $package.Version}; $process = Get-Process -Name "Microsoft.SkypeRoomSystem" -ErrorAction SilentlyContinue; if ($null -eq $process) {write-host "App not running."} else {$process | format-list StartTime,Responding}} -ComputerName $Computer -Credential $cred
+               invoke-command {Write-Host "===== Teams App Status =====" -ForegroundColor Blue; $package = get-appxpackage -User Skype -Name Microsoft.SkypeRoomSystem; if ($null -eq $package) {Write-host "SkypeRoomSystems not installed."} else {write-host "Teams App version : " $package.Version}; $process = Get-Process -Name "Microsoft.SkypeRoomSystem" -ErrorAction SilentlyContinue; if ($null -eq $process) {write-host "App not running." -ForegroundColor Red} else {$process | format-list StartTime,Responding}} -ComputerName $Computer -Credential $cred
+
+               #Get related scheduled tasks status
+               invoke-command {Write-Host "===== Scheduled Tasks Status =====" -ForegroundColor Blue; get-ScheduledTask -TaskPath \Microsoft\Skype\ | ft TaskName,State} -ComputerName $Computer -Credential $cred               
           }
           catch{
                Write-Warning $_.Exception.Message
