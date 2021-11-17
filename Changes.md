@@ -5,8 +5,8 @@
 
 ===== Scheduled Tasks Status =====
 
-`TaskName        State`
-`--------        -----`
-`Imaging         Ready`
-`Logon         Running`
-`NightlyReboot   Ready`
+    TaskName        State
+    --------        -----
+    Imaging         Ready
+    Logon         Running
+    NightlyReboot   Ready
