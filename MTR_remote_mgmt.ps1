@@ -271,7 +271,107 @@ function setTheme{
           }
      }
 }
+function IsValidEmail { 
+     param([string]$Email)
+     $Regex = '^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$'
+ 
+    try {
+         $obj = [mailaddress]$Email
+         if($obj.Address -match $Regex){
+             return $True
+         }
+         return $False
+     }
+     catch {
+         return $False
+     } 
+ }
+function setAppUserAccount{
+     param (
+          [Parameter()]
+          [string]$Computer,
+          [ValidateNotNull()]
+          [System.Management.Automation.Credential()]
+          [System.Management.Automation.PSCredential]$cred
+     )
+     #Disclaimer
+     Write-Host "PLEASE NOTE:`nThis will only change the SkypeSignInAddress and associated Password value for the Teams App on the device.`nNo credentials validation are being performed!!`nPlease be sure you enter the correct credentials." -ForegroundColor Yellow
+     if($cred -ne [System.Management.Automation.PSCredential]::Empty){
+          do{               
+               $localUser = Read-Host -Prompt "Please enter ressource account name (i.e. rito@contoso.com; Leave blank to cancel)"
+               $isValid = isValidEmail $localUser
+          }until ($isValid -or !$localUser -or ($localUser.Length -eq 0))
+          if (!$isValid){
+               return $false
+          }
 
+          $localPwd = Read-Host -Prompt "Enter password for $localUser (leave blank to cancel)" -AsSecureString
+          if (!$localPwd -or ($localPwd.Length -eq 0)){
+               return $false
+          }
+          else{
+               $localPwd2 = Read-Host -Prompt "Re-enter new password for $localUser (leave blank to cancel)" -AsSecureString
+               if (!$localPwd2 -or ($localPwd2.Length -eq 0)){
+                    return $false
+               }
+               else{
+                    $pwd1 = [Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR($localPwd))
+                    $pwd2 = [Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR($localPwd2))
+                    if ($pwd1 -ne $pwd2){
+                         Write-Host "Passwords do not match, cancelling..." -ForegroundColor Yellow
+                         return $false
+                    }
+               }
+          }
+          #$MAEnabled = "true"
+
+          #Select one of the predefined Meeting modes
+          $MeetingsModes = @("Skype for Business (default) and Microsoft Teams","Skype for Business and Microsoft Teams (default)","Skype for Business only","Microsoft Teams only")
+          $MeetingsModes | ForEach-Object {"[$PSItem]"}
+          do{               
+               $MeetingsMode = Read-Host "Please enter theme name (leave blank to cancel)"
+          }until (($MeetingsMode -eq "") -or ($MeetingsMode -in $MeetingsModes))
+          if ($MeetingsMode -eq ""){
+               return
+          }
+          Write-Host $MeetingsMode
+          $MTRAppPath = "C:\Users\Skype\AppData\Local\Packages\Microsoft.SkypeRoomSystem_8wekyb3d8bbwe\LocalState\"
+          #$XmlRemoteFile = $MTRAppPath+"SkypeSettings.xml"
+          try{
+               $XmlLocalFile = "$PSScriptRoot\SkypeSettings.xml"
+               #Create XML file structure
+               $xmlfs = '<SkypeSettings>
+               <UserAccount>
+                    <SkypeSignInAddress>$userName</SkypeSignInAddress>
+                    <ExchangeAddress>$userName</ExchangeAddress>
+                    <Password>$userPwd</Password>
+               </UserAccount>
+               </SkypeSettings>
+               '
+               #Interpret & replace variables values
+               $xmlfs = $xmlfs.Replace('$userName',$localUser)
+               $xmlfs = $xmlfs.Replace('$userPwd',$pwd1)
+               #$xmlfs = $xmlfs.Replace('$MAEnabled',$MAEnabled)
+               #$xmlfs = $xmlfs.Replace('$MeetingsMode',$MeetingsMode)
+               #Transform string to XML structure
+               $xmlFile = [xml]$xmlfs
+               #Save base RDC file
+               $xmlFile.Save($XmlLocalFile)
+
+               $MTR_session = new-pssession -ComputerName $Computer -Credential $cred
+               Copy-Item -Path $XmlLocalFile -Destination $MTRAppPath -ToSession $MTR_session
+               remove-item -force $XmlLocalFile
+               if ($ImgLocalFile){
+                    Copy-Item -Path $ImgLocalFile -Destination $MTRAppPath -ToSession $MTR_session
+               }
+               Remove-PSSession $MTR_session
+               Write-Host "Please RESTART `'$Computer`' to apply new settings!" -for Cyan
+          }
+          catch{
+               Write-Warning $_.Exception.Message
+          }
+     }
+}
 function connect2MTR{
      param (
           [string]$Computer,
@@ -306,12 +406,13 @@ $menuOptions = @(
 "`n================ MTR REMOTE MANAGEMENT ================"
 "1: Target MTR device."
 "2: Change MTR 'Admin' local user password."
-"3: Check MTR status."
-"4: Get MTR device logs."
-"5: Set MTR theme image."
-"6: Run nightly maintenance scheduled task."
-"7: Logoff MTR 'Skype' user."
-"8: Restart MTR."
+"3: Set MTR resource account (Teams App user account)."
+"4: Check MTR status."
+"5: Get MTR device logs."
+"6: Set MTR theme image."
+"7: Run nightly maintenance scheduled task."
+"8: Logoff MTR 'Skype' user."
+"9: Restart MTR."
 "Q: Press 'Q' to quit."
 )
 
@@ -353,12 +454,13 @@ do{
                               }                              
                               break
                          }
-                         '3'{checkMTRStatus $MTR_hostName $creds;break}
-                         '4'{retrieveLogs $MTR_hostName $creds;break}
-                         '5'{setTheme $MTR_hostName $creds;break}
-                         '6'{RunDailyMaintenanceTask $MTR_hostName $creds;$MTR_ready = $false;break}
-                         '7'{remote_logoff $MTR_hostName $creds;break}
-                         '8'{rebootMTR $MTR_hostName $creds;$MTR_ready = $false;break}
+                         '3'{setAppUserAccount $MTR_hostName $creds;break}
+                         '4'{checkMTRStatus $MTR_hostName $creds;break}
+                         '5'{retrieveLogs $MTR_hostName $creds;break}
+                         '6'{setTheme $MTR_hostName $creds;break}
+                         '7'{RunDailyMaintenanceTask $MTR_hostName $creds;break}
+                         '8'{remote_logoff $MTR_hostName $creds;break}
+                         '9'{rebootMTR $MTR_hostName $creds;$MTR_ready = $false;break}
                     }                    
                }
                else {selectOpt1}
