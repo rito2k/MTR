@@ -73,6 +73,7 @@ From here on, you can enter a Powershell session on the remote device (1), or di
 
 * Teams App Version 4.9.12.0
 * Teams App Version 4.10.10.0
+* Teams App Version 4.11.12.0
 
 ## Usage
 
@@ -87,19 +88,19 @@ Invoke the script, select an option and follow the instructions:
     ================ MTR REMOTE MANAGEMENT ================
     1: Target MTR device.
     2: Change MTR 'Admin' local user password.
-    3: Check MTR status.
-    4: Get MTR device logs.
-    5: Set MTR theme image.
-    6: Run nightly maintenance scheduled task.
-    7: Logoff MTR 'Skype' user.
-    8: Restart MTR.
+    3: Set MTR resource account (Teams App user account)."
+    4: Check MTR status."
+    5: Get MTR device logs."
+    6: Set MTR theme image."
+    7: Run nightly maintenance scheduled task."
+    8: Update MTR App Version"
+    9: Logoff MTR 'Skype' user."
+    10: Restart MTR."
     Q: Press 'Q' to quit.
     Please make a selection:
 
 ## Backlog
-* Option to set MTR ressource account credentials
 * Option to set MTR proxy settings
-* Option to install the agent installer for MTR-Premium portal management
 
 ## FAQ
 
