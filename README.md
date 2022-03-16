@@ -74,6 +74,7 @@ From here on, you can enter a Powershell session on the remote device (1), or di
 * Teams App Version 4.9.12.0
 * Teams App Version 4.10.10.0
 * Teams App Version 4.11.12.0
+* Teams App Version 4.11.17.0
 
 ## Usage
 
