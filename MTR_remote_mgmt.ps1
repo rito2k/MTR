@@ -75,7 +75,7 @@ function resetUserPwd{
           else{
                $pwd1 = [Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR($localPwd))
                $pwd2 = [Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR($localPwd2))
-               if ($pwd1 -ne $pwd2){
+               if ($pwd1 -cne $pwd2){
                     Write-Host "Passwords do not match, cancelling..." -ForegroundColor Yellow
                     return $false
                }
@@ -388,7 +388,7 @@ function setAppUserAccount{
 }
 
 function downloadFile{
-     #Base code --> https://gist.github.com/TheBigBear/68510c4e8891f43904d1
+     #Reference code --> https://gist.github.com/TheBigBear/68510c4e8891f43904d1
      param(
      [Parameter(Mandatory = $true,Position = 0)]
      [string]
@@ -479,7 +479,7 @@ function downloadFile{
                          Copy-Item -Path $scriptFile -Destination $remoteFileName -ToSession $MTR_session -Force
                          Write-Host "File copied to `'$destinationFolder`' on `'$Computer`'..." -for Green
                          Write-Host "Applying update `'$fileName`'!! Please restart MTR when finished ;-)" -for Cyan
-                         Invoke-command -ScriptBlock {cd $using:destinationFolder;PowerShell.exe -ExecutionPolicy Unrestricted -File $using:remoteFileName} -ComputerName $Computer -Credential $cred 
+                         Invoke-command -ScriptBlock {Set-Location $using:destinationFolder;PowerShell.exe -ExecutionPolicy Unrestricted -File $using:remoteFileName} -ComputerName $Computer -Credential $cred 
                          Remove-PSSession $MTR_session
                     }
                     else{
