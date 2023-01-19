@@ -11,7 +11,7 @@
 #
 function Show-Menu{     
      if ($MTR_ready){
-          Write-Host "(Target MTR: $MTR_hostName)" -ForegroundColor Green
+          Write-Host "[Target MTR: $MTR_hostName (v$MTR_version)]" -ForegroundColor Green
      }
      else {
           Write-Host "(No target MTR!)" -ForegroundColor Red
@@ -135,6 +135,25 @@ function RunDailyMaintenanceTask{
           }          
      }
 }
+
+function get-MTR_version{     
+     param (
+          [Parameter()]
+          [string]$Computer,
+          [ValidateNotNull()]
+          [System.Management.Automation.Credential()]
+          [System.Management.Automation.PSCredential]$cred
+     )
+     if($cred -ne [System.Management.Automation.PSCredential]::Empty) {
+          try{
+               $ver = invoke-command { (get-appxpackage -User Skype -Name Microsoft.SkypeRoomSystem).Version } -ComputerName $Computer -Credential $cred
+          }
+          catch{
+               Write-Warning $_.Exception.Message
+          }
+          return $ver
+     }
+}
 function rebootMTR{
      param (
           [Parameter()]
@@ -203,9 +222,14 @@ function setTheme{
           [System.Management.Automation.PSCredential]$cred
      )
      if($cred -ne [System.Management.Automation.PSCredential]::Empty){
-          #Select one of the predefined Themes or set a custom one.
-          $themes = @("Default","No Theme","Custom","Blue Wave","Digital Forest","Dreamcatcher","Limeade","Pixel Perfect","Purple Paradise","Roadmap","Sunset")
-          $themes | ForEach-Object {"[$PSItem]"}
+          #Select one of the predefined Themes or set a custom one.          
+          if ($MTR_version.StartsWith("4.15.")){
+               $themes = @("Default","Custom","No Theme","Blue Wave","Creative Conservatory","Digital Forest","Dreamcatcher","Into The Fold","Limeade","Pixel Perfect","Purple Paradise","Roadmap","Seaside Bliss","Summer Summit","Sunset","Vivid Flag Default")
+          }
+          else{
+               $themes = @("Default","No Theme","Custom","Blue Wave","Digital Forest","Dreamcatcher","Limeade","Pixel Perfect","Purple Paradise","Roadmap","Sunset")
+          }          
+          $themes | ForEach-Object {write-host "[$PSItem]" -ForegroundColor Magenta}
           do{               
                $themeName = Read-Host "Please enter theme name (leave blank to cancel)"
           }until (($themeName -eq "") -or ($themeName -in $themes))
@@ -521,6 +545,7 @@ function connect2MTR{
 [string]$MTR_hostName = $null
 [string]$MTR_AdminUser = "Admin"
 [bool]$MTR_ready = $false
+[string]$MTR_version = "0.0.0.0"
 #$ProgressPreference = 'SilentlyContinue'
 [string]$scriptPath = "$PSScriptRoot\"
 [System.Management.Automation.PSCredential] $global:creds = $null
@@ -560,6 +585,7 @@ do{
           $MTR_hostName = $MTR_hostName.ToUpper()
           if ($MTR_hostName -ne ""){
                $MTR_ready = connect2MTR $MTR_hostName ([REF]$global:creds)
+               $MTR_version = get-MTR_version $MTR_hostName $creds
           }
      }
      else{
