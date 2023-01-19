@@ -71,10 +71,7 @@ From here on, you can enter a Powershell session on the remote device (1), or di
 
 ### Compatibility
 
-* Teams App Version 4.9.12.0
-* Teams App Version 4.10.10.0
-* Teams App Version 4.11.12.0
-* Teams App Version 4.11.17.0
+* Teams App Version 4.15.58.0
 
 ## Usage
 
@@ -99,9 +96,6 @@ Invoke the script, select an option and follow the instructions:
     10: Restart MTR.
     Q: Press 'Q' to quit.
     Please make a selection:
-
-## Backlog
-* Option to set MTR proxy settings
 
 ## FAQ
 
