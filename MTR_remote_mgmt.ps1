@@ -341,7 +341,7 @@ function setAppUserAccount{
                else{
                     $pwd1 = [Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR($localPwd))
                     $pwd2 = [Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR($localPwd2))
-                    if ($pwd1 -ne $pwd2){
+                    if ($pwd1 -cne $pwd2){
                          Write-Host "Passwords do not match, cancelling..." -ForegroundColor Yellow
                          return $false
                     }
