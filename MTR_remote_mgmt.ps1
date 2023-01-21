@@ -160,7 +160,7 @@ function setMTRLanguage{
                Set-WinUserLanguageList $using:locale -Force
                Set-WinSystemLocale $using:locale
                C:\Rigel\x64\Scripts\Provisioning\ScriptLaunch.ps1 Applycurrentregionandlanguage.ps1
-               }
+          }
           try{
                invoke-command -ScriptBlock $scriptBlock -ComputerName $Computer -Credential $cred
                Write-Host "Please RESTART `'$Computer`' to apply new settings!" -for Cyan
