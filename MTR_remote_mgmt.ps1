@@ -594,7 +594,7 @@ $menuOptions = @(
 "6: Get MTR device LOGS."
 "7: Set MTR THEME image."
 "8: Run nightly MAINTENANCE scheduled task."
-"9: Update MTR App VERSION"
+"9: UPDATE MTR App version"
 "10: LOGOFF MTR 'Skype' user."
 "11: RESTART MTR."
 "Q: Press 'Q' to quit."
