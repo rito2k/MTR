@@ -84,16 +84,17 @@ Invoke the script, select an option and follow the instructions:
     (No target MTR!)
 
     ================ MTR REMOTE MANAGEMENT ================
-    1: Target MTR device.
-    2: Change MTR 'Admin' local user password.
-    3: Set MTR resource account (Teams App user account).
-    4: Check MTR status.
-    5: Get MTR device logs.
-    6: Set MTR theme image.
-    7: Run nightly maintenance scheduled task.
-    8: Update MTR App Version
-    9: Logoff MTR 'Skype' user.
-    10: Restart MTR.
+    1: TARGET MTR device.
+    2: Change MTR 'Admin' local user PASSWORD.
+    3: Set MTR resource ACCOUNT (Teams App user account).
+    4: Set MTR Teams App LANGUAGE.
+    5: Check MTR STATUS.
+    6: Get MTR device LOGS.
+    7: Set MTR THEME image.
+    8: Run nightly MAINTENANCE scheduled task.
+    9: Update MTR App VERSION
+    10: LOGOFF MTR 'Skype' user.
+    11: RESTART MTR.
     Q: Press 'Q' to quit.
     Please make a selection:
 
