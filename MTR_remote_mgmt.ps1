@@ -399,7 +399,7 @@ function setAppUserAccount{
                return
           }
           Write-Host 'Selected Meeting Mode:' $MeetingsModes[$MeetingsMode-1] -ForegroundColor Cyan
-          switch ($selection){
+          switch ($MeetingsMode){
                '1'{$TeamsMeetingsEnabled="true";$SfbMeetingEnabled="true";$IsTeamsDefaultClient="false";break}
                '2'{$TeamsMeetingsEnabled="true";$SfbMeetingEnabled="true";$IsTeamsDefaultClient="true";break}
                '3'{$TeamsMeetingsEnabled="false";$SfbMeetingEnabled="true";$IsTeamsDefaultClient="false";break}
